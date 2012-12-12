@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BT-client</string>
+    <string name="boton_iniciar">Iniciar conexión</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_conexiones_disponibles">ConexionesDisponiblesAct</string>
+    <string name="respuesta_cliente">Esperando respuesta</string>
+    <string name="title_activity_conexion_cliente">ConexionClienteAct</string>
+
+</resources>

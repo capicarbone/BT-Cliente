@@ -22,11 +22,12 @@ public class ConnectThread extends Thread{
 		 BluetoothSocket tmp = null;
 		 deviceTarget = device;
 		 UUID_APP = UUID.fromString(UUID_STR);
+		 adapterBt = adp;
 	 	        
-        /*try {
-            
+        try {
+                    	
             tmp = device.createRfcommSocketToServiceRecord(UUID_APP);
-        } catch (IOException e) { } */
+        } catch (IOException e) { } 
          socket = tmp;
 		
 	}
@@ -38,7 +39,7 @@ public class ConnectThread extends Thread{
  
         try {
             // Connect the device through the socket. This will block
-            // until it succeeds or throws an exception
+            // until it succeeds or throws an exception        	
             socket.connect();
         } catch (IOException connectException) {
             // Unable to connect; close the socket and get out

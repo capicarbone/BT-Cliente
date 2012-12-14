@@ -48,8 +48,11 @@ public class ConexionClienteAct extends Activity {
 		Intent intent = getIntent();
 		BluetoothDevice target = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 		
+		TextView texto = (TextView) findViewById(R.id.respuesta_cliente);
+		texto.setText(target.getName());
+		
 		hiloCliente = new ConnectThread(btAdapter, target);
-		//hiloCliente.start();
+		hiloCliente.start();
 	}
 
 	@Override

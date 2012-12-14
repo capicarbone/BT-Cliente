@@ -14,12 +14,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 public class ConexionesDisponiblesAct extends Activity {
 	
 	private static final int PETICION_ACTION_BT = 45;
-	private static final String DEVICE_TARGET = "personal.bt.client.DEVICE_TARGE";
+	private static final String DEVICE_TARGET = "personal.bt.client.DEVICE_TARGET";
 	
 	
 	private ArrayAdapter<BluetoothDevice> disponiblesList;
@@ -30,6 +31,7 @@ public class ConexionesDisponiblesAct extends Activity {
 	private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
 		
 	    public void onReceive(Context context, Intent intent) {
+	    	
 	        String action = intent.getAction();
 	        	        
 	        if (BluetoothDevice.ACTION_FOUND.equals(action)) {
@@ -67,8 +69,23 @@ public class ConexionesDisponiblesAct extends Activity {
 		// Se asigna su correspondiente layout al Activity
 		setContentView(R.layout.activity_conexiones_disponibles);
 		
+		
+		// Se obtiene del layout la lista para los dispositivos y se le es asignado un
+		// evento para recibirlos
+		
 		ListView lista = (ListView) findViewById(R.id.dispositivos_disponibles);
-		lista.setOnItemClickListener(conectarDispositivo);
+		
+		lista.setOnItemClickListener(new OnItemClickListener() {
+			
+			public void onItemClick(AdapterView<?> padre, View vista, int posicion, long id) {
+					
+				BluetoothDevice device = disponiblesList.getItem(posicion);
+				Intent intent = new Intent(vista.getContext(), ConexionClienteAct.class);
+				intent.putExtra(BluetoothDevice.EXTRA_DEVICE, device);
+				startActivity(intent);
+								
+			}
+		});
 		
 		// Se obtiene el adaptador Bluetooth del dispositivo
 		
@@ -125,9 +142,4 @@ public class ConexionesDisponiblesAct extends Activity {
 		
 	}
 	
-	private void conectarDipositivo(BluetoothDevice device){
-		
-		Intent intent = new Intent(this, ConexionClienteAct.class);
-		intent.putExtra(DEVICE_TARGET, device);
-	}
 }

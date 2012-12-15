@@ -51,7 +51,7 @@ public class ConexionClienteAct extends Activity {
 		TextView texto = (TextView) findViewById(R.id.respuesta_cliente);
 		texto.setText(target.getName());
 		
-		hiloCliente = new ConnectThread(btAdapter, target);
+		hiloCliente = new ConnectThread(btAdapter, target, texto);
 		hiloCliente.start();
 	}
 
